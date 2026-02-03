@@ -143,8 +143,27 @@
     renderCart();
   });
 }
+function checkout() {
+  fetch('https://YOUR-RENDER-BACKEND.onrender.com/order', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      customerName: "Test User",
+      items: cart.map(c => c.item),
+      total: cart.reduce((sum, c) => sum + c.price, 0),
+      customerNumber: "+919876543210" // replace with real customer number
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    alert("Order placed! You'll get WhatsApp confirmation soon.");
+    cart = [];
+    renderCart();
+  });
+}
 
   </script>
 </body>
 </html>
+
 
